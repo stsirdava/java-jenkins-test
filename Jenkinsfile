@@ -20,23 +20,15 @@ parameters {
 }
 
 triggers {
+    githubPush()
     cron('30 13,18 * 3 0,2')
 }
 
 stages {
 
-    stage('Checkout') {
-        steps {
-            git branch: 'main',
-                url: 'https://github.com/stsirdava/java-jenkins-test.git'
-        }
-    }
-
     stage('Build') {
         steps {
-
             echo "Building for ${params.ENV}"
-
             bat 'mvn clean compile'
 
             writeFile(
