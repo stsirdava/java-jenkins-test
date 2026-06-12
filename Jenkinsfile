@@ -89,7 +89,7 @@ Environment: ${params.ENV}
 post {
 
     success {
-        echo 'Build successful'
+        echo 'Build successfully finished'
     }
 
     unsuccessful {
