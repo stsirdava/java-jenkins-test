@@ -111,7 +111,10 @@ Job Name: ${env.JOB_NAME}
         junit '**/target/surefire-reports/*.xml'
 
         allure(
-            results: [[path: 'allure-results']]
+            results: [
+                [path: 'allure-results'],
+                [path: 'target/allure-results']
+            ]
         )
 
         publishHTML([

@@ -3,8 +3,8 @@
 <suite name="Jenkins Practice Suite">
     <test name="Selenium Local Tests">
         <classes>
-            <class name="ApiTest"/>
-            <class name="GoogleTest"/>
+            <class name="tests.ApiTest"/>
+            <class name="tests.GoogleTest"/>
         </classes>
     </test>
 </suite>
