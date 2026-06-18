@@ -134,6 +134,7 @@ Job Name: ${env.JOB_NAME}
 )
 
         archiveArtifacts artifacts: 'log.txt'
+        archiveArtifacts artifacts: 'target/allure-results'
     }
 }
 }

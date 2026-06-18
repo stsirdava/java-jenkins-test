@@ -10,14 +10,15 @@ pipeline {
     stages {
         stage('Publish Allure report') {
             steps {
+                junit '**/target/surefire-reports/*.xml'
+
+                allure(
+                    results: [[path: 'target/allure-results']]
+                )
 
                 copyArtifacts(
                     projectName: 'QA-Automation-Pipeline',
-                    selector: latest())
-
-                junit '**/target/surefire-reports/*.xml'
-
-                allure(results: [[path: 'target/allure-results']])
+                    filter: 'target/allure-results/**')
             }
         }
     }
@@ -35,7 +36,6 @@ pipeline {
                         reportName: 'Demo HTML Report'
             ])
 
-            cleanWs()
         }
 
     }
