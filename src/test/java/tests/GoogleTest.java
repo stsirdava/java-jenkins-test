@@ -46,7 +46,7 @@ public class GoogleTest extends BaseTest {
     @Test(groups = "ui")
     public void failedTest() {
 
-        Allure.step("Intentional failure");
+        Allure.step("Intentional failure for demonstration");
 
         Assert.assertEquals(
                 "Google",
