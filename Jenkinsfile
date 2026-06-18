@@ -47,13 +47,13 @@ Environment: ${params.ENV}
 
             stage('UI Tests') {
                 steps {
-                    bat 'mvn clean test -Dgroups=ui'
+                    bat 'mvn test -Dgroups=ui'
                 }
             }
 
             stage('API Tests') {
                 steps {
-                    bat 'mvn clean test -Dgroups=api'
+                    bat 'mvn test -Dgroups=api'
                 }
             }
         }
