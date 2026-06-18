@@ -29,6 +29,7 @@ pipeline {
     post {
         always {
             echo 'Publishing HTML Report...'
+
             publishHTML([
                 allowMissing: false,
                 alwaysLinkToLastBuild: true,
