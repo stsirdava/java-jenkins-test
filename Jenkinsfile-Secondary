@@ -1,0 +1,45 @@
+pipeline {
+    agent  any
+
+    triggers {
+        upstream(
+            upstreamProjects: 'QA-Automation-Pipeline',
+            )}
+
+
+    stages {
+        stage('Publish Allure report') {
+            steps {
+                junit '**/target/surefire-reports/*.xml'
+
+                allure(
+                    results: [[path: 'target/allure-results']]
+                )
+            }
+        }
+    }
+
+    post {
+        always {
+
+            echo 'Allure report published'
+            publishHTML([
+                        allowMissing: false,
+                        alwaysLinkToLastBuild: true,
+                        keepAll: true,
+                        reportDir: 'custom-report',
+                        reportFiles: 'index.html',
+                        reportName: 'Demo HTML Report'
+            ])
+
+            cleanWs()
+        }
+
+    }
+}
+
+
+
+
+
+

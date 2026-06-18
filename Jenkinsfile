@@ -135,27 +135,5 @@ Job Name: ${env.JOB_NAME}
 
         archiveArtifacts artifacts: 'log.txt'
     }
-
-    always {
-
-        junit '**/target/surefire-reports/*.xml'
-
-        allure(
-            results: [
-                [path: 'target/allure-results']
-            ]
-        )
-
-        publishHTML([
-            allowMissing: false,
-            alwaysLinkToLastBuild: true,
-            keepAll: true,
-            reportDir: 'custom-report',
-            reportFiles: 'index.html',
-            reportName: 'Demo HTML Report'
-        ])
-
-        cleanWs()
-    }
 }
 }
