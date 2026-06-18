@@ -12,13 +12,12 @@ pipeline {
             steps {
 
                 copyArtifacts(
-                    projectName: 'QA-Automation-Pipeline'
-                  )
+                    projectName: 'QA-Automation-Pipeline',
+                    selector: latest())
 
+                junit '**/target/surefire-reports/*.xml'
 
-                 junit '**/target/surefire-reports/*.xml'
-
-                 allure(results: [[path: 'target/allure-results']])
+                allure(results: [[path: 'target/allure-results']])
             }
         }
     }
