@@ -15,6 +15,10 @@ pipeline {
                 allure(
                     results: [[path: 'target/allure-results']]
                 )
+
+                copyArtifacts(
+                    projectName: 'QA-Automation-Pipeline',
+                    filter: 'target/allure-results/**')
             }
         }
     }
