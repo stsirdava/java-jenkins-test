@@ -3,7 +3,9 @@ pipeline {
 
     triggers {
         upstream(
-            upstreamProjects: 'QA-Automation-Pipeline'
+            upstreamProjects: 'QA-Automation-Pipeline',
+            threshold: hudson.model.Result.FAILURE
+        )
     }
 
     stages {
