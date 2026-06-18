@@ -47,13 +47,13 @@ Environment: ${params.ENV}
 
             stage('UI Tests') {
                 steps {
-                    bat 'mvn test -Dgroups=ui'
+                    bat 'mvn clean test -Dgroups=ui'
                 }
             }
 
             stage('API Tests') {
                 steps {
-                    bat 'mvn test -Dgroups=api'
+                    bat 'mvn clean test -Dgroups=api'
                 }
             }
         }
@@ -112,7 +112,6 @@ Job Name: ${env.JOB_NAME}
 
         allure(
             results: [
-                [path: 'allure-results'],
                 [path: 'target/allure-results']
             ]
         )

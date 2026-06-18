@@ -4,6 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
+import java.lang.reflect.Field;
+
 public class AllureListener implements ITestListener {
 
     @Override
@@ -14,8 +16,9 @@ public class AllureListener implements ITestListener {
         WebDriver driver = null;
 
         try {
-            driver = (WebDriver) testClass.getClass().getDeclaredField("driver").get(testClass);
-
+            Field field = testClass.getClass().getDeclaredField("driver");
+            field.setAccessible(true);
+            driver = (WebDriver) field.get(testClass);
         } catch (Exception e) {
             e.printStackTrace();
         }
