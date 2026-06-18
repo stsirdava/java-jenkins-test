@@ -1,51 +1,40 @@
 pipeline {
-    agent  any
+    agent any
 
     triggers {
         upstream(
-            upstreamProjects: 'QA-Automation-Pipeline',
-            )}
-
+            upstreamProjects: 'QA-Automation-Pipeline'
+    }
 
     stages {
-        stage('Publish Allure report') {
+        stage('Fetch Artifacts & Publish Reports') {
             steps {
-
                 copyArtifacts(
-                                    projectName: 'QA-Automation-Pipeline',
-                                    filter: 'target/allure-results/**')
-
-                junit '**/target/surefire-reports/*.xml'
-
-                allure(
-                    results: [[path: 'target/allure-results/**']]
+                    projectName: 'QA-Automation-Pipeline',
+                    filter: 'target/allure-results/**, custom-report/index.html',
+                    selector: lastCompleted()
                 )
 
+                junit allowEmptyResults: true, testResults: '**/target/surefire-reports/*.xml'
 
+                allure(
+                    results: [[path: 'target/allure-results']]
+                )
             }
         }
     }
 
     post {
         always {
-
-            echo 'Allure report published'
+            echo 'Publishing HTML Report...'
             publishHTML([
-                        allowMissing: false,
-                        alwaysLinkToLastBuild: true,
-                        keepAll: true,
-                        reportDir: 'custom-report',
-                        reportFiles: 'index.html',
-                        reportName: 'Demo HTML Report'
+                allowMissing: false,
+                alwaysLinkToLastBuild: true,
+                keepAll: true,
+                reportDir: 'custom-report',
+                reportFiles: 'index.html',
+                reportName: 'Demo HTML Report'
             ])
-
         }
-
     }
 }
-
-
-
-
-
-
