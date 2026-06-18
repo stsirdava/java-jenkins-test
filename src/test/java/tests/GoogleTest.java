@@ -6,16 +6,11 @@ import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
-import org.testng.ITestResult;
 import org.testng.SkipException;
 import org.testng.annotations.*;
 import steps.GoogleSteps;
-import utils.AllureListener;
 import utils.DriverManager;
-import utils.ScreenshotUtils;
 
-
-@Listeners(AllureListener.class)
 @Epic("Web UI")
 @Feature("Google Search")
 @Story("Open Google Homepage")
@@ -71,13 +66,6 @@ public class GoogleTest extends BaseTest {
         throw new SkipException(
                 "Environment unavailable"
         );
-    }
-
-    @AfterMethod
-    public void captureOnFailure(ITestResult result) {
-        if (!result.isSuccess()) {
-            ScreenshotUtils.capture(DriverManager.getDriver());
-        }
     }
 
     @AfterClass(alwaysRun = true)
