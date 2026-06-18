@@ -41,6 +41,19 @@ Environment: ${params.ENV}
 }
 }
 
+    stage('Validate Environment') {
+
+        steps {
+
+            script {
+
+                if (params.ENV == 'prod') {
+                    echo 'Extra production validation'
+                }
+            }
+        }
+    }
+
     stage('Test') {
 
         parallel {
@@ -82,6 +95,23 @@ Environment: ${params.ENV}
                 </html>
                 '''
             )
+        }
+    }
+
+    stage('Deploy') {
+
+        when {
+            allOf {
+                branch 'main'
+
+                expression {
+                    params.ENV == 'prod'
+                }
+            }
+        }
+
+        steps {
+            echo "Deploying to production"
         }
     }
 }
