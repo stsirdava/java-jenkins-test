@@ -13,7 +13,7 @@ pipeline {
             steps {
                 copyArtifacts(
                     projectName: 'QA-Automation-Pipeline',
-                    filter: 'target/allure-results/**, custom-report/index.html',
+                    filter: 'target/allure-results/**',
                     selector: lastCompleted()
                 )
 
@@ -28,16 +28,7 @@ pipeline {
 
     post {
         always {
-            echo 'Publishing HTML Report...'
-
-            publishHTML([
-                allowMissing: false,
-                alwaysLinkToLastBuild: true,
-                keepAll: true,
-                reportDir: 'custom-report',
-                reportFiles: 'index.html',
-                reportName: 'Demo HTML Report'
-            ])
+            echo 'Reporting run finalized.'
         }
     }
 }

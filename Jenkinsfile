@@ -73,21 +73,6 @@ Environment: ${params.ENV}
             }
         }
 
-        stage('Generate HTML Report') {
-            steps {
-                writeFile(
-                    file: 'custom-report/index.html',
-                    text: '''
-                    <html>
-                        <body>
-                            Jenkins Exam Demo Report
-                        </body>
-                    </html>
-                    '''
-                )
-            }
-        }
-
         stage('Deploy') {
             when {
                 allOf {
@@ -120,7 +105,6 @@ Job Name: ${env.JOB_NAME}
 
         always {
             archiveArtifacts artifacts: 'target/allure-results/**', allowEmptyArchive: true
-            archiveArtifacts artifacts: 'custom-report/index.html', allowEmptyArchive: true
         }
     }
 }
