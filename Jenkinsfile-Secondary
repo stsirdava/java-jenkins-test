@@ -12,8 +12,8 @@ pipeline {
             steps {
 
                 copyArtifacts(
-                    projectName: 'QA-Automation-Pipeline',
-                    selector: lastSuccessful())
+                    projectName: 'QA-Automation-Pipeline'
+                  )
 
 
                  junit '**/target/surefire-reports/*.xml'
