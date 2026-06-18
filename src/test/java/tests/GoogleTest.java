@@ -66,7 +66,7 @@ public class GoogleTest extends BaseTest {
         );
     }
 
-    @Test
+    @Test(groups = "ui")
     public void skippedTest() {
         throw new SkipException(
                 "Environment unavailable"
